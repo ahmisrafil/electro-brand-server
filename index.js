@@ -47,7 +47,14 @@ async function run() {
         res.send(result);
     })
 
-
+    //add Cart data to server
+    const cartCollection = client.db("cartDB").collection("cart");
+    app.post('/cart', async(req, res)=>{
+        const newCart = req.body;
+        console.log(newCart);
+        const result = await cartCollection.insertOne(newCart);
+        res.send(result);
+    })
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
